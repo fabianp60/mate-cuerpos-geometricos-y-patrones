@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Simulacro de Examen - Matemáticas Primaria</title>
+<style>
+  @page {
+    size: letter portrait;
+    margin: 10mm 12mm 10mm 12mm;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Lato', 'DejaVu Sans', sans-serif;
+    color: #1e293b;
+    margin: 0;
+    padding: 0;
+    font-size: 10pt;
+    line-height: 1.34;
+    background: #ffffff;
+  }
+  .page {
+    page-break-after: always;
+    height: 256mm;
+    max-height: 256mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .page:last-child {
+    page-break-after: avoid;
+  }
+  
+  /* Encabezado */
+  .header-card {
+    border: 2px solid #2563eb;
+    border-radius: 8px;
+    padding: 8px 12px;
+    background: #f8fafc;
+    margin-bottom: 7px;
+  }
+  .header-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1.5px solid #cbd5e1;
+    padding-bottom: 4px;
+    margin-bottom: 5px;
+  }
+  .school-title {
+    font-size: 13pt;
+    font-weight: 800;
+    color: #1e40af;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .badge-exam {
+    background: #1e40af;
+    color: white;
+    font-size: 8pt;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 12px;
+  }
+  .header-info-grid {
+    display: grid;
+    grid-template-columns: 2.2fr 1fr 1fr;
+    gap: 8px;
+    font-size: 8.5pt;
+  }
+  .info-field {
+    display: flex;
+    align-items: baseline;
+  }
+  .info-field b {
+    margin-right: 4px;
+    color: #334155;
+  }
+  .line-fill {
+    flex: 1;
+    border-bottom: 1px dotted #64748b;
+    min-height: 14px;
+  }
+  .header-sub-row {
+    display: flex;
+    justify-content: space-between;
+    background: #eff6ff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-top: 5px;
+    font-size: 8pt;
+    color: #1e40af;
+    font-weight: 600;
+  }
+  
+  /* Mini cabecera páginas 2-4 */
+  .mini-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #3b82f6;
+    padding-bottom: 3px;
+    margin-bottom: 7px;
+    font-size: 8pt;
+    color: #475569;
+  }
+  .mini-header b {
+    color: #1e40af;
+  }
+  
+  /* Secciones */
+  .section-badge {
+    background: #1e40af;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 8.5pt;
+    padding: 3px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 4px;
+    letter-spacing: 0.3px;
+  }
+  .section-intro {
+    font-size: 8pt;
+    color: #475569;
+    margin-bottom: 5px;
+    font-style: italic;
+  }
+  
+  /* Tarjetas de actividades */
+  .activity-card {
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin-bottom: 6px;
+    background: #ffffff;
+  }
+  .activity-title {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .activity-pts {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: #0f172a;
+    font-size: 7.5pt;
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  
+  /* Grilla de poliedros */
+  .poly-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+    margin-top: 3px;
+  }
+  .poly-item {
+    border: 1.5px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 5px 6px;
+    text-align: center;
+    background: #fcfcfd;
+  }
+  .poly-item-tag {
+    font-size: 7.5pt;
+    font-weight: 800;
+    color: #1e40af;
+    background: #e0e7ff;
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-bottom: 2px;
+  }
+  .poly-fields {
+    font-size: 7.5pt;
+    text-align: left;
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+  .poly-input-line {
+    border-bottom: 1.2px solid #64748b;
+    height: 13px;
+    display: inline-block;
+    width: 100%;
+    margin-top: 1px;
+  }
+  .poly-check-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3px;
+  }
+  
+  /* Pregunta 2 */
+  .choice-block {
+    background: #f8fafc;
+    border-left: 3px solid #3b82f6;
+    padding: 5px 8px;
+    font-size: 8pt;
+    margin-bottom: 5px;
+  }
+  .vf-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8pt;
+    margin-top: 4px;
+  }
+  .vf-table td {
+    padding: 3.5px 5px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .vf-col-box {
+    width: 42px;
+    text-align: center;
+    font-weight: bold;
+  }
+  .box-vf {
+    border: 1.5px solid #64748b;
+    border-radius: 4px;
+    padding: 2px 7px;
+    display: inline-block;
+    background: #fff;
+    font-size: 8.5pt;
+  }
+  
+  /* Tabla de conteo */
+  .counting-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8pt;
+    margin-top: 4px;
+    text-align: center;
+  }
+  .counting-table th {
+    background: #1e3a8a;
+    color: #ffffff;
+    padding: 5px 4px;
+    font-size: 7.5pt;
+    font-weight: 700;
+    border: 1px solid #1e3a8a;
+  }
+  .counting-table td {
+    border: 1px solid #cbd5e1;
+    padding: 5px 4px;
+  }
+  .counting-table tr:nth-child(even) {
+    background: #f8fafc;
+  }
+  .cell-name {
+    text-align: left;
+    font-weight: 600;
+    color: #1e293b;
+    padding-left: 6px !important;
+  }
+  
+  /* Secuencias */
+  .seq-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 6px 9px;
+    margin: 4px 0 6px 0;
+  }
+  .seq-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .seq-label {
+    font-size: 7.2pt;
+    font-weight: 700;
+    color: #475569;
+    margin-bottom: 2px;
+  }
+  .seq-box {
+    border: 1.5px solid #94a3b8;
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 4px 6px;
+    min-width: 80px;
+    min-height: 48px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+  }
+  /* Caja de dibujo ampliada, limpia y con cuadrícula de puntos guía */
+  .seq-draw-box {
+    border: 2px dashed #2563eb;
+    background-color: #ffffff;
+    background-image: radial-gradient(#93c5fd 1.3px, transparent 1.3px);
+    background-size: 11px 11px;
+    border-radius: 6px;
+    width: 165px;
+    min-width: 165px;
+    height: 56px;
+    display: block;
+    position: relative;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);
+  }
+  .seq-arrow {
+    font-size: 13pt;
+    color: #94a3b8;
+    font-weight: bold;
+  }
+  
+  /* Líneas de redacción */
+  .write-line {
+    border-bottom: 1.5px dashed #94a3b8;
+    min-height: 18px;
+    width: 100%;
+    margin-top: 3px;
+  }
+  
+  /* Pie de página */
+  .footer-exam {
+    border-top: 1px solid #cbd5e1;
+    padding-top: 3px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 7.2pt;
+    color: #64748b;
+  }
+  
+  /* Figuras geométricas planas */
+  .tri-shape {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 14px solid #059669;
+    display: inline-block;
+  }
+  .sq-shape {
+    width: 12px;
+    height: 12px;
+    background: #2563eb;
+    border-radius: 2px;
+    display: inline-block;
+  }
+  .cir-shape {
+    width: 13px;
+    height: 13px;
+    background: #ea580c;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+  .badge-inc {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 7.5pt;
+  }
+  .badge-dec {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 7.5pt;
+  }
+  
+  .riddle-box {
+    background: #f8fafc;
+    border-left: 3.5px solid #8b5cf6;
+    padding: 5px 8px;
+    margin: 4px 0;
+    font-size: 8pt;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* Cajas creativas de dibujo para la Pregunta 10 (libres de texto interno con cuadrícula guía) */
+  .creative-box {
+    border: 1.5px dashed #3b82f6;
+    border-radius: 6px;
+    background-color: #ffffff;
+    background-image: radial-gradient(#93c5fd 1.3px, transparent 1.3px);
+    background-size: 11px 11px;
+    padding: 4px;
+    text-align: center;
+    min-height: 82px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);
+  }
+</style>
+</head>
+<body>
+
+<!-- ========================================== -->
+<!-- PÁGINA 1: IDENTIFICACIÓN Y CLASIFICACIÓN   -->
+<!-- ========================================== -->
+<div class="page">
+  <div>
+    <!-- Encabezado del examen -->
+    <div class="header-card">
+      <div class="header-title-row">
+        <div>
+          <div class="school-title">Simulacro de Matemáticas</div>
+          <div style="font-size: 8pt; color: #475569; font-weight: 500;">Evaluación Diagnóstica: Cuerpos Geométricos 3D y Patrones Secuenciales</div>
+        </div>
+        <div style="text-align: right;">
+          <span class="badge-exam">TIEMPO MÁXIMO: 60 MINUTOS</span>
+          <div style="font-size: 7.5pt; color: #64748b; margin-top: 2px;">Puntaje Total: <b>100 pts</b></div>
+        </div>
+      </div>
+      
+      <div class="header-info-grid">
+        <div class="info-field">
+          <b>Nombre de la estudiante:</b>
+          <div class="line-fill"></div>
+        </div>
+        <div class="info-field">
+          <b>Fecha:</b>
+          <div class="line-fill"></div>
+        </div>
+        <div class="info-field">
+          <b>Grado:</b>
+          <div class="line-fill"></div>
+        </div>
+      </div>
+      
+      <div class="header-sub-row">
+        <span>Instrucciones: Lee cada pregunta con calma. Tienes 1 hora. Escribe con letra clara y dibuja con precisión.</span>
+        <span><b>Calificación:</b> [ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; / 100 ]</span>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 1 -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+      <span class="section-badge">SECCIÓN 1: CUERPOS GEOMÉTRICOS — PRISMAS Y PIRÁMIDES</span>
+      <span style="font-size: 8pt; font-weight: bold; color: #1e40af;">Valor: 25 Puntos</span>
+    </div>
+    <div class="section-intro">
+      Identifica las características de los poliedros. Recuerda: los prismas tienen dos bases iguales y las pirámides terminan en una cúspide o punta. Los cuerpos son transparentes para que puedas observar la forma de su base en el fondo.
+    </div>
+
+    <!-- ACTIVIDAD 1 -->
+    <div class="activity-card" style="padding: 6px 9px; margin-bottom: 6px;">
+      <div class="activity-title">
+        <span>1. Galería Geométrica: Reconocimiento Visual y Clasificación</span>
+        <span class="activity-pts">15 Puntos (2.5 pts c/u)</span>
+      </div>
+      <div style="font-size: 7.8pt; color: #334155; margin-bottom: 3px;">
+        Observa cada cuerpo geométrico a través de sus caras transparentes. Escribe su <b>nombre completo</b>, marca si es <b>Prisma o Pirámide</b>, e indica la <b>figura de su base</b>.
+      </div>
+      
+      <div class="poly-grid">
+        <!-- Cuerpo A -->
+        <div class="poly-item">
+          <div class="poly-item-tag">Cuerpo A</div>
+          <div><svg width="90" height="75" viewBox="0 0 100 85" xmlns="http://www.w3.org/2000/svg">
+      <!-- Aristas traseras discontinuas visibles por la semitransparencia -->
+      <line x1="40" y1="10" x2="40" y2="56" stroke="#2563eb" stroke-width="1.8" stroke-dasharray="3,3" stroke-opacity="0.8"/>
+      <line x1="16" y1="72" x2="40" y2="56" stroke="#2563eb" stroke-width="1.8" stroke-dasharray="3,3" stroke-opacity="0.8"/>
+      <line x1="40" y1="56" x2="86" y2="56" stroke="#2563eb" stroke-width="1.8" stroke-dasharray="3,3" stroke-opacity="0.8"/>
+      <circle cx="40" cy="56" r="2.6" fill="#1e40af" fill-opacity="0.7"/>
+
+      <!-- Base inferior visible y sombreada (D-C-G-H) -->
+      <polygon points="16,72 62,72 86,56 40,56" fill="#93c5fd" fill-opacity="0.25"/>
+
+      <!-- Caras semitransparentes -->
+      <polygon points="16,26 62,26 86,10 40,10" fill="#bfdbfe" fill-opacity="0.4" stroke="#1e40af" stroke-width="1.8"/>
+      <polygon points="62,26 62,72 86,56 86,10" fill="#60a5fa" fill-opacity="0.4" stroke="#1e40af" stroke-width="1.8"/>
+      <polygon points="16,26 62,26 62,72 16,72" fill="#93c5fd" fill-opacity="0.35" stroke="#1e40af" stroke-width="1.8"/>
+
+      <!-- Aristas frontales continuas -->
+      <line x1="16" y1="26" x2="16" y2="72" stroke="#1e40af" stroke-width="1.8"/>
+      <line x1="16" y1="72" x2="62" y2="72" stroke="#1e40af" stroke-width="1.8"/>
+      
+      <!-- Los 8 vértices -->
+      <circle cx="16" cy="26" r="2.8" fill="#1e40af"/>
+      <circle cx="62" cy="26" r="2.8" fill="#1e40af"/>
+      <circle cx="62" cy="72" r="2.8" fill="#1e40af"/>
+      <circle cx="16" cy="72" r="2.8" fill="#1e40af"/>
+      <circle cx="40" cy="10" r="2.8" fill="#1e40af"/>
+      <circle cx="86" cy="10" r="2.8" fill="#1e40af"/>
+      <circle cx="86" cy="56" r="2.8" fill="#1e40af"/>
+    </svg></div>
+          <div class="poly-fields">
+            <b>Nombre:</b> <span class="poly-input-line"></span>
+            <div class="poly-check-row">
+              <label><input type="checkbox"> Prisma</label>
+              <label><input type="checkbox"> Pirámide</label>
+            </div>
+            <b>Forma base:</b> <span class="poly-input-line"></span>
+          </div>
+        </div>
+        
+        <!-- Cuerpo B -->
+        <div class="poly-item">
+          <div class="poly-item-tag">Cuerpo B</div>
+          <div><svg width="90" height="75" viewBox="0 0 100 85" xmlns="http://www.w3.org/2000/svg">
+      <!-- Aristas traseras de la base cuadrada y arista hacia la cúspide (discontinuas con color vivo) -->
+      <line x1="15" y1="66" x2="51" y2="52" stroke="#ea580c" stroke-width="1.8" stroke-dasharray="3,3"/>
+      <line x1="51" y1="52" x2="88" y2="66" stroke="#ea580c" stroke-width="1.8" stroke-dasharray="3,3"/>
+      <line x1="51" y1="12" x2="51" y2="52" stroke="#ea580c" stroke-width="1.8" stroke-dasharray="3,3"/>
+      <circle cx="51" cy="52" r="2.8" fill="#ea580c" fill-opacity="0.85"/>
+
+      <!-- Base cuadrada resaltada en tono ámbar translúcido (4 lados) -->
+      <polygon points="15,66 52,78 88,66 51,52" fill="#fde047" fill-opacity="0.38"/>
+
+      <!-- Caras laterales traseras translúcidas -->
+      <polygon points="51,12 15,66 51,52" fill="#fed7aa" fill-opacity="0.22"/>
+      <polygon points="51,12 51,52 88,66" fill="#fed7aa" fill-opacity="0.22"/>
+
+      <!-- Caras laterales frontales semitransparentes -->
+      <polygon points="51,12 15,66 52,78" fill="#ffedd5" fill-opacity="0.45" stroke="#c2410c" stroke-width="1.8"/>
+      <polygon points="51,12 52,78 88,66" fill="#fed7aa" fill-opacity="0.45" stroke="#c2410c" stroke-width="1.8"/>
+
+      <!-- Aristas frontales de la base -->
+      <line x1="15" y1="66" x2="52" y2="78" stroke="#c2410c" stroke-width="2"/>
+      <line x1="52" y1="78" x2="88" y2="66" stroke="#c2410c" stroke-width="2"/>
+
+      <!-- Vértices frontales y cúspide (Total: 5 vértices) -->
+      <circle cx="51" cy="12" r="3.4" fill="#c2410c"/>
+      <circle cx="15" cy="66" r="2.8" fill="#c2410c"/>
+      <circle cx="52" cy="78" r="2.8" fill="#c2410c"/>
+      <circle cx="88" cy="66" r="2.8" fill="#c2410c"/>
+    </svg></div>
+          <div class="poly-fields">
+            <b>Nombre:</b> <span class="poly-input-line"></span>
+            <div class="poly-check-row">
+              <label><input type="checkbox"> Prisma</label>
+              <label><input type="checkbox"> Pirámide</label>
+            </div>
+            <b>Forma base:</b> <span class="poly-input-line"></span>
+          </div>
+        </div>
+        
+        <!-- Cuerpo C -->
+        <div class="poly-item">
+          <div class="poly-item-tag">Cuerpo C</div>
+          <div><svg width="90" height="75" viewBox="0 0 100 85" xmlns="http://www.w3.org/2000/svg">
+      <!-- Aristas traseras discontinuas (vertical y base inferior) -->
+      <line x1="44" y1="11" x2="44" y2="54" stroke="#059669" stroke-width="1.8" stroke-dasharray="3,3"/>
+      <line x1="18" y1="65" x2="44" y2="54" stroke="#059669" stroke-width="1.8" stroke-dasharray="3,3"/>
+      <line x1="44" y1="54" x2="62" y2="75" stroke="#059669" stroke-width="1.8" stroke-dasharray="3,3"/>
+      <circle cx="44" cy="54" r="2.8" fill="#047857" fill-opacity="0.8"/>
+
+      <!-- Base inferior triangular sombreada translúcida -->
+      <polygon points="18,65 62,75 44,54" fill="#6ee7b7" fill-opacity="0.32"/>
+
+      <!-- Caras laterales translúcidas -->
+      <polygon points="62,32 44,11 44,54 62,75" fill="#6ee7b7" fill-opacity="0.4" stroke="#047857" stroke-width="1.8"/>
+      <polygon points="18,22 62,32 62,75 18,65" fill="#d1fae5" fill-opacity="0.4" stroke="#047857" stroke-width="1.8"/>
+      <polygon points="18,22 44,11 44,54 18,65" fill="#a7f3d0" fill-opacity="0.2"/>
+
+      <!-- Base superior triangular -->
+      <polygon points="18,22 62,32 44,11" fill="#a7f3d0" fill-opacity="0.48" stroke="#047857" stroke-width="1.8"/>
+
+      <!-- Arista frontal de la base inferior -->
+      <line x1="18" y1="65" x2="62" y2="75" stroke="#047857" stroke-width="2"/>
+
+      <!-- Los 6 vértices (3 arriba + 3 abajo) -->
+      <circle cx="18" cy="22" r="2.8" fill="#047857"/>
+      <circle cx="62" cy="32" r="2.8" fill="#047857"/>
+      <circle cx="44" cy="11" r="2.8" fill="#047857"/>
+      <circle cx="18" cy="65" r="2.8" fill="#047857"/>
+      <circle cx="62" cy="75" r="2.8" fill="#047857"/>
+    </svg></div>
+          <div class="poly-fields">
+            <b>Nombre:</b> <span class="poly-input-line"></span>
+            <div class="poly-check-row">
+              <label><input type="checkbox"> Prisma</label>
+              <label><input type="checkbox"> Pirámide</label>
+            </div>
+            <b>Forma base:</b> <span class="poly-input-line"></span>
+          </div>
+        </div>
+        
+        <!-- Cuerpo D -->
+        <div class="poly-item">
+          <div class="poly-item-tag">Cuerpo D</div>
+          <div><svg width="90" height="75" viewBox="0 0 100 85" xmlns="http://www.w3.org/2000/svg">
+      <!-- Arista trasera de la base triangular At-Ct (discontinua con color púrpura) -->
+      <line x1="16" y1="70" x2="84" y2="58" stroke="#a21caf" stroke-width="1.8" stroke-dasharray="3,3"/>
+      <line x1="48" y1="12" x2="84" y2="58" stroke="#a21caf" stroke-width="1.8" stroke-dasharray="3,3"/>
+      <circle cx="84" cy="58" r="2.8" fill="#a21caf" fill-opacity="0.85"/>
+
+      <!-- Base TRIANGULAR resaltada translúcida (claramente un triángulo de 3 lados) -->
+      <polygon points="16,70 64,78 84,58" fill="#e879f9" fill-opacity="0.35"/>
+
+      <!-- Cara trasera SAC translúcida -->
+      <polygon points="48,12 16,70 84,58" fill="#f5d0fe" fill-opacity="0.22"/>
+
+      <!-- Caras laterales frontales semitransparentes -->
+      <polygon points="48,12 16,70 64,78" fill="#fdf4ff" fill-opacity="0.45" stroke="#86198f" stroke-width="1.8"/>
+      <polygon points="48,12 64,78 84,58" fill="#f5d0fe" fill-opacity="0.45" stroke="#86198f" stroke-width="1.8"/>
+
+      <!-- Aristas frontales de la base (solo 2 aristas visibles continuas) -->
+      <line x1="16" y1="70" x2="64" y2="78" stroke="#86198f" stroke-width="2"/>
+      <line x1="64" y1="78" x2="84" y2="58" stroke="#86198f" stroke-width="2"/>
+
+      <!-- Los 4 vértices (3 en la base triangular + 1 cúspide) -->
+      <circle cx="48" cy="12" r="3.4" fill="#86198f"/>
+      <circle cx="16" cy="70" r="2.8" fill="#86198f"/>
+      <circle cx="64" cy="78" r="2.8" fill="#86198f"/>
+    </svg></div>
+          <div class="poly-fields">
+            <b>Nombre:</b> <span class="poly-input-line"></span>
+            <div class="poly-check-row">
+              <label><input type="checkbox"> Prisma</label>
+              <label><input type="checkbox"> Pirámide</label>
+            </div>
+            <b>Forma base:</b> <span class="poly-input-line"></span>
+          </div>
+        </div>
+        
+        <!-- Cuerpo E -->
+        <div class="poly-item">
+          <div class="poly-item-tag">Cuerpo E</div>
+          <div><svg width="90" height="75" viewBox="0 0 100 85" xmlns="http://www.w3.org/2000/svg">
+      <!-- Aristas traseras discontinuas visibles -->
+      <line x1="30" y1="17" x2="30" y2="58" stroke="#475569" stroke-width="1.6" stroke-dasharray="3,3"/>
+      <line x1="59" y1="13" x2="59" y2="54" stroke="#475569" stroke-width="1.6" stroke-dasharray="3,3"/>
+      <line x1="28" y1="73" x2="30" y2="58" stroke="#475569" stroke-width="1.6" stroke-dasharray="3,3"/>
+      <line x1="30" y1="58" x2="59" y2="54" stroke="#475569" stroke-width="1.6" stroke-dasharray="3,3"/>
+      <line x1="59" y1="54" x2="81" y2="65" stroke="#475569" stroke-width="1.6" stroke-dasharray="3,3"/>
+      
+      <circle cx="30" cy="58" r="2.4" fill="#334155" fill-opacity="0.7"/>
+      <circle cx="59" cy="54" r="2.4" fill="#334155" fill-opacity="0.7"/>
+
+      <!-- Base inferior pentagonal translúcida -->
+      <polygon points="30,58 59,54 81,65 65,77 28,73" fill="#cbd5e1" fill-opacity="0.32"/>
+
+      <!-- Caras laterales semitransparentes -->
+      <polygon points="28,32 65,36 65,77 28,73" fill="#e2e8f0" fill-opacity="0.4" stroke="#1e293b" stroke-width="1.8"/>
+      <polygon points="65,36 81,24 81,65 65,77" fill="#94a3b8" fill-opacity="0.4" stroke="#1e293b" stroke-width="1.8"/>
+      <polygon points="30,17 28,32 28,73 30,58" fill="#f1f5f9" fill-opacity="0.3" stroke="#1e293b" stroke-width="1.8"/>
+      
+      <!-- Base superior pentagonal -->
+      <polygon points="30,17 59,13 81,24 65,36 28,32" fill="#cbd5e1" fill-opacity="0.48" stroke="#1e293b" stroke-width="1.8"/>
+
+      <!-- Aristas frontales inferiores -->
+      <line x1="28" y1="73" x2="65" y2="77" stroke="#1e293b" stroke-width="1.8"/>
+      <line x1="65" y1="77" x2="81" y2="65" stroke="#1e293b" stroke-width="1.8"/>
+
+      <!-- Los 10 vértices -->
+      <circle cx="30" cy="17" r="2.4" fill="#334155"/><circle cx="59" cy="13" r="2.4" fill="#334155"/><circle cx="81" cy="24" r="2.4" fill="#334155"/><circle cx="65" cy="36" r="2.4" fill="#334155"/><circle cx="28" cy="32" r="2.4" fill="#334155"/>
+      <circle cx="28" cy="73" r="2.4" fill="#334155"/>
+      <circle cx="65" cy="77" r="2.4" fill="#334155"/>
+      <circle cx="81" cy="65" r="2.4" fill="#334155"/>
+    </svg></div>
+          <div class="poly-fields">
+            <b>Nombre:</b> <span class="poly-input-line"></span>
+            <div class="poly-check-row">
+              <label><input type="checkbox"> Prisma</label>
+              <label><input type="checkbox"> Pirámide</label>
+            </div>
+            <b>Forma base:</b> <span class="poly-input-line"></span>
+          </div>
+        </div>
+        
+        <!-- Cuerpo F -->
+        <div class="poly-item">
+          <div class="poly-item-tag">Cuerpo F</div>
+          <div><svg width="90" height="75" viewBox="0 0 100 85" xmlns="http://www.w3.org/2000/svg">
+      <!-- Aristas traseras de la base de 6 lados y hacia la cúspide (discontinuas con color) -->
+      <line x1="87" y1="60" x2="71" y2="50" stroke="#6366f1" stroke-width="1.6" stroke-dasharray="3,3"/>
+      <line x1="71" y1="50" x2="32" y2="50" stroke="#6366f1" stroke-width="1.6" stroke-dasharray="3,3"/>
+      <line x1="32" y1="50" x2="15" y2="60" stroke="#6366f1" stroke-width="1.6" stroke-dasharray="3,3"/>
+      <line x1="49" y1="11" x2="71" y2="50" stroke="#6366f1" stroke-width="1.6" stroke-dasharray="3,3"/>
+      <line x1="49" y1="11" x2="32" y2="50" stroke="#6366f1" stroke-width="1.6" stroke-dasharray="3,3"/>
+      <circle cx="71" cy="50" r="2.4" fill="#4338ca" fill-opacity="0.85"/>
+      <circle cx="32" cy="50" r="2.4" fill="#4338ca" fill-opacity="0.85"/>
+
+      <!-- Base hexagonal sombreada translúcida (6 lados visibles) -->
+      <polygon points="15,60 35,73 68,73 87,60 71,50 32,50" fill="#a5b4fc" fill-opacity="0.32"/>
+
+      <!-- Caras laterales semitransparentes -->
+      <polygon points="49,11 15,60 35,73" fill="#e0e7ff" fill-opacity="0.45" stroke="#3730a3" stroke-width="1.6"/>
+      <polygon points="49,11 35,73 68,73" fill="#c7d2fe" fill-opacity="0.45" stroke="#3730a3" stroke-width="1.6"/>
+      <polygon points="49,11 68,73 87,60" fill="#a5b4fc" fill-opacity="0.45" stroke="#3730a3" stroke-width="1.6"/>
+
+      <!-- Aristas frontales de la base -->
+      <line x1="15" y1="60" x2="35" y2="73" stroke="#3730a3" stroke-width="1.8"/>
+      <line x1="35" y1="73" x2="68" y2="73" stroke="#3730a3" stroke-width="1.8"/>
+      <line x1="68" y1="73" x2="87" y2="60" stroke="#3730a3" stroke-width="1.8"/>
+
+      <!-- Los 7 vértices (6 en la base + 1 cúspide) -->
+      <circle cx="49" cy="11" r="3.2" fill="#3730a3"/>
+      <circle cx="15" cy="60" r="2.4" fill="#3730a3"/>
+      <circle cx="35" cy="73" r="2.4" fill="#3730a3"/>
+      <circle cx="68" cy="73" r="2.4" fill="#3730a3"/>
+      <circle cx="87" cy="60" r="2.4" fill="#3730a3"/>
+    </svg></div>
+          <div class="poly-fields">
+            <b>Nombre:</b> <span class="poly-input-line"></span>
+            <div class="poly-check-row">
+              <label><input type="checkbox"> Prisma</label>
+              <label><input type="checkbox"> Pirámide</label>
+            </div>
+            <b>Forma base:</b> <span class="poly-input-line"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIVIDAD 2 -->
+    <div class="activity-card" style="padding: 6px 9px;">
+      <div class="activity-title">
+        <span>2. Diferencias Fundamentales: ¿Prisma o Pirámide?</span>
+        <span class="activity-pts">10 Puntos</span>
+      </div>
+      
+      <div class="choice-block">
+        <b>A. Opción Múltiple con Justificación (4 pts):</b><br>
+        ¿Cuál es la diferencia principal entre las <b>caras laterales</b> de un prisma recto y las de una pirámide?
+        <div style="margin-top: 2px; font-size: 8pt;">
+          <label style="display: block; margin: 2px 0;"><input type="radio" name="p2a"> <b>a)</b> Los prismas tienen caras laterales triangulares y las pirámides caras circulares.</label>
+          <label style="display: block; margin: 2px 0;"><input type="radio" name="p2a"> <b>b)</b> Los prismas tienen caras laterales con forma de rectángulo, mientras que las pirámides tienen caras laterales triangulares que se unen en la punta.</label>
+          <label style="display: block; margin: 2px 0;"><input type="radio" name="p2a"> <b>c)</b> No hay diferencia, ambos cuerpos tienen siempre las mismas caras laterales.</label>
+        </div>
+        <div style="margin-top: 4px; font-size: 7.8pt;">
+          <b>Explica con tus palabras por qué elegiste esa opción:</b>
+          <div class="write-line"></div>
+          <div class="write-line"></div>
+        </div>
+      </div>
+
+      <div style="font-size: 8pt;">
+        <b>B. Detective de la Verdad: Escribe (V) si es Verdadero o (F) si es Falso (6 pts - 2 pts c/u):</b>
+        <table class="vf-table">
+          <tr>
+            <td class="vf-col-box"><span class="box-vf">&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+            <td>1. Un prisma siempre tiene <b>dos bases</b> que son polígonos exactamente iguales y paralelos.</td>
+          </tr>
+          <tr>
+            <td class="vf-col-box"><span class="box-vf">&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+            <td>2. Una pirámide cuadrangular tiene dos bases con forma de cuadrado.</td>
+          </tr>
+          <tr>
+            <td class="vf-col-box"><span class="box-vf">&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+            <td>3. El punto más alto donde se juntan las caras triangulares de una pirámide se llama <b>cúspide o vértice superior</b>.</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de página -->
+  <div class="footer-exam">
+    <span>Simulacro de Matemáticas | Temas: Cuerpos Geométricos y Secuencias</span>
+    <span>Página <b>1</b> de <b>4</b></span>
+  </div>
+</div>
+
+
+<!-- ========================================== -->
+<!-- PÁGINA 2: CARACTERIZACIÓN (CARAS, VÉRTICES) -->
+<!-- ========================================== -->
+<div class="page">
+  <div>
+    <!-- Running header -->
+    <div class="mini-header">
+      <div><b>Simulacro de Matemáticas</b> | Sección 2: Caracterización de Cuerpos</div>
+      <div>Nombre de la estudiante: _____________________________________ | Pág. <b>2</b> de <b>4</b></div>
+    </div>
+
+    <!-- SECCIÓN 2 -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+      <span class="section-badge">SECCIÓN 2: CARACTERIZACIÓN — CARAS, VÉRTICES Y ARISTAS</span>
+      <span style="font-size: 8pt; font-weight: bold; color: #1e40af;">Valor: 25 Puntos</span>
+    </div>
+    <div class="section-intro">
+      Los elementos fundamentales de un poliedro son sus caras (superficies), aristas (líneas) y vértices (puntos).
+    </div>
+
+    <!-- ACTIVIDAD 3 -->
+    <div class="activity-card" style="padding: 6px 9px; margin-bottom: 6px;">
+      <div class="activity-title">
+        <span>3. Anatomía de los Poliedros: Identificación de Partes</span>
+        <span class="activity-pts">9 Puntos</span>
+      </div>
+      <div style="font-size: 7.8pt; color: #334155; margin-bottom: 3px;">
+        Observa los diagramas anatómicos del <b>Prisma</b> y de la <b>Pirámide</b>. Revisa las flechas que señalan cada elemento.
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <div style="border: 1px solid #cbd5e1; border-radius: 6px; padding: 4px; text-align: center; background: #fafafa;">
+          <div style="font-size: 7.5pt; font-weight: bold; color: #1e40af; margin-bottom: 1px;">PRISMA (Cubo / Prisma Rectangular)</div>
+          <svg width="305" height="130" viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="ar-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1 L 8 5 L 0 9 z" fill="#dc2626"/>
+        </marker>
+        <marker id="ar-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1 L 8 5 L 0 9 z" fill="#2563eb"/>
+        </marker>
+      </defs>
+      
+      <!-- Aristas traseras visibles discontinuas -->
+      <line x1="124" y1="13" x2="124" y2="81" stroke="#2563eb" stroke-width="1.8" stroke-dasharray="3,3" stroke-opacity="0.75"/>
+      <line x1="90" y1="104" x2="124" y2="81" stroke="#2563eb" stroke-width="1.8" stroke-dasharray="3,3" stroke-opacity="0.75"/>
+      <line x1="124" y1="81" x2="192" y2="81" stroke="#2563eb" stroke-width="1.8" stroke-dasharray="3,3" stroke-opacity="0.75"/>
+      
+      <!-- Caras semitransparentes -->
+      <polygon points="90,36 158,36 192,13 124,13" fill="#dbeafe" fill-opacity="0.45" stroke="#1d4ed8" stroke-width="2"/>
+      <polygon points="158,36 158,104 192,81 192,13" fill="#bfdbfe" fill-opacity="0.45" stroke="#1d4ed8" stroke-width="2"/>
+      <polygon points="90,36 158,36 158,104 90,104" fill="#93c5fd" fill-opacity="0.38" stroke="#1d4ed8" stroke-width="2"/>
+      
+      <!-- Vértice destacado -->
+      <circle cx="90" cy="36" r="5.2" fill="#ef4444" stroke="#ffffff" stroke-width="1.5"/>
+      <!-- Arista destacada -->
+      <line x1="158" y1="36" x2="158" y2="104" stroke="#dc2626" stroke-width="4.2"/>
+      
+      <!-- Indicador: VÉRTICE -->
+      <line x1="45" y1="20" x2="87" y2="33" stroke="#dc2626" stroke-width="1.6" marker-end="url(#ar-red)"/>
+      <rect x="5" y="8" width="62" height="24" rx="4" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="36" y="24" font-family="Lato, sans-serif" font-size="9.5" font-weight="bold" fill="#dc2626" text-anchor="middle">VÉRTICE</text>
+      
+      <!-- Indicador: ARISTA -->
+      <line x1="230" y1="70" x2="161" y2="70.0" stroke="#dc2626" stroke-width="1.6" marker-end="url(#ar-red)"/>
+      <rect x="235" y="58" width="64" height="24" rx="4" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="267" y="74" font-family="Lato, sans-serif" font-size="9.5" font-weight="bold" fill="#dc2626" text-anchor="middle">ARISTA</text>
+      
+      <!-- Indicador: CARA -->
+      <line x1="48" y1="106" x2="112.66666666666667" y2="70.0" stroke="#dc2626" stroke-width="1.6" marker-end="url(#ar-red)"/>
+      <rect x="10" y="104" width="65" height="24" rx="4" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="42" y="120" font-family="Lato, sans-serif" font-size="9.5" font-weight="bold" fill="#dc2626" text-anchor="middle">CARA</text>
+      
+      <!-- Indicador: BASE SUPERIOR -->
+      <line x1="230" y1="22" x2="141.0" y2="24.5" stroke="#2563eb" stroke-width="1.6" marker-end="url(#ar-blue)"/>
+      <rect x="232" y="10" width="80" height="24" rx="4" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+      <text x="272" y="26" font-family="Lato, sans-serif" font-size="8.8" font-weight="bold" fill="#2563eb" text-anchor="middle">BASE SUPERIOR</text>
+    </svg>
+        </div>
+        <div style="border: 1px solid #cbd5e1; border-radius: 6px; padding: 4px; text-align: center; background: #fafafa;">
+          <div style="font-size: 7.5pt; font-weight: bold; color: #c2410c; margin-bottom: 1px;">PIRÁMIDE CUADRANGULAR</div>
+          <svg width="305" height="130" viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="ar-pyr" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1 L 8 5 L 0 9 z" fill="#c2410c"/>
+        </marker>
+      </defs>
+      
+      <!-- Aristas traseras de la base cuadrada discontinua visible -->
+      <line x1="88" y1="106" x2="140" y2="92" stroke="#ea580c" stroke-width="1.8" stroke-dasharray="3,3"/>
+      <line x1="140" y1="92" x2="192" y2="106" stroke="#ea580c" stroke-width="1.8" stroke-dasharray="3,3"/>
+      <line x1="140" y1="20" x2="140" y2="92" stroke="#ea580c" stroke-width="1.8" stroke-dasharray="3,3"/>
+      
+      <!-- Base cuadrada translúcida -->
+      <polygon points="88,106 140,120 192,106 140,92" fill="#fde047" fill-opacity="0.35"/>
+
+      <!-- Caras laterales semitransparentes -->
+      <polygon points="140,20 88,106 140,120" fill="#ffedd5" fill-opacity="0.45" stroke="#ea580c" stroke-width="1.8"/>
+      <polygon points="140,20 140,120 192,106" fill="#fed7aa" fill-opacity="0.45" stroke="#ea580c" stroke-width="1.8"/>
+      <line x1="88" y1="106" x2="140" y2="120" stroke="#ea580c" stroke-width="1.8"/>
+      <line x1="140" y1="120" x2="192" y2="106" stroke="#ea580c" stroke-width="1.8"/>
+      
+      <!-- Cúspide y vértice basal destacados -->
+      <circle cx="140" cy="20" r="5.2" fill="#dc2626" stroke="#ffffff" stroke-width="1.5"/>
+      <circle cx="140" cy="120" r="3.8" fill="#c2410c"/>
+      <line x1="140" y1="120" x2="192" y2="106" stroke="#b91c1c" stroke-width="3.8"/>
+      
+      <!-- Indicador: CÚSPIDE -->
+      <line x1="70" y1="20" x2="134" y2="20" stroke="#c2410c" stroke-width="1.6" marker-end="url(#ar-pyr)"/>
+      <rect x="5" y="8" width="65" height="26" rx="4" fill="#ffffff" stroke="#c2410c" stroke-width="1.5"/>
+      <text x="37" y="21" font-family="Lato, sans-serif" font-size="8.8" font-weight="bold" fill="#c2410c" text-anchor="middle">CÚSPIDE</text>
+      <text x="37" y="30" font-family="Lato, sans-serif" font-size="7.8" fill="#64748b" text-anchor="middle">(Vértice sup.)</text>
+      
+      <!-- Indicador: CARA LATERAL -->
+      <line x1="52" y1="74" x2="120" y2="72" stroke="#c2410c" stroke-width="1.6" marker-end="url(#ar-pyr)"/>
+      <rect x="5" y="62" width="78" height="26" rx="4" fill="#ffffff" stroke="#c2410c" stroke-width="1.5"/>
+      <text x="44" y="74" font-family="Lato, sans-serif" font-size="8.8" font-weight="bold" fill="#c2410c" text-anchor="middle">CARA LATERAL</text>
+      <text x="44" y="84" font-family="Lato, sans-serif" font-size="7.8" fill="#64748b" text-anchor="middle">(Triangular)</text>
+      
+      <!-- Indicador: BASE -->
+      <line x1="230" y1="116" x2="174" y2="112" stroke="#c2410c" stroke-width="1.6" marker-end="url(#ar-pyr)"/>
+      <rect x="232" y="103" width="78" height="26" rx="4" fill="#ffffff" stroke="#c2410c" stroke-width="1.5"/>
+      <text x="271" y="115" font-family="Lato, sans-serif" font-size="8.8" font-weight="bold" fill="#c2410c" text-anchor="middle">BASE</text>
+      <text x="271" y="125" font-family="Lato, sans-serif" font-size="7.8" fill="#64748b" text-anchor="middle">(1 sola base)</text>
+      
+      <!-- Indicador: ARISTA -->
+      <line x1="230" y1="60" x2="165" y2="112" stroke="#c2410c" stroke-width="1.6" marker-end="url(#ar-pyr)"/>
+      <rect x="235" y="48" width="68" height="24" rx="4" fill="#ffffff" stroke="#c2410c" stroke-width="1.5"/>
+      <text x="269" y="64" font-family="Lato, sans-serif" font-size="9.5" font-weight="bold" fill="#c2410c" text-anchor="middle">ARISTA</text>
+    </svg>
+        </div>
+      </div>
+
+      <div style="margin-top: 5px; font-size: 8pt;">
+        <b>Define brevemente con tus palabras qué es cada parte (1 pt c/u):</b>
+        <div style="margin-top: 3px;">
+          • <b>Una CARA es:</b> <span class="poly-input-line" style="width: 85%;"></span>
+        </div>
+        <div style="margin-top: 3px;">
+          • <b>Una ARISTA es:</b> <span class="poly-input-line" style="width: 83%;"></span>
+        </div>
+        <div style="margin-top: 3px;">
+          • <b>Un VÉRTICE es:</b> <span class="poly-input-line" style="width: 83%;"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIVIDAD 4 -->
+    <div class="activity-card" style="padding: 6px 9px; margin-bottom: 6px;">
+      <div class="activity-title">
+        <span>4. Gran Tabla de Conteo Sistemático</span>
+        <span class="activity-pts">10 Puntos (2 pts por fila completa)</span>
+      </div>
+      <div style="font-size: 7.8pt; color: #334155; margin-bottom: 2px;">
+        Cuenta con mucha atención las partes de cada cuerpo geométrico y completa la tabla:
+      </div>
+
+      <table class="counting-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Cuerpo Geométrico</th>
+            <th style="width: 15%;">Forma de la Base</th>
+            <th style="width: 12%;">N° de Bases</th>
+            <th style="width: 14%;">Caras Laterales</th>
+            <th style="width: 12%;">TOTAL CARAS</th>
+            <th style="width: 11%;">VÉRTICES</th>
+            <th style="width: 11%;">ARISTAS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cell-name"><b>1. Cubo</b> (Prisma cuadrangular)</td>
+            <td>Cuadrado</td>
+            <td>2</td>
+            <td>4</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="cell-name"><b>2. Prisma Triangular</b></td>
+            <td>Triángulo</td>
+            <td>&nbsp;</td>
+            <td>3</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="cell-name"><b>3. Pirámide Cuadrangular</b></td>
+            <td>Cuadrado</td>
+            <td>&nbsp;</td>
+            <td>4</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="cell-name"><b>4. Pirámide Triangular</b></td>
+            <td>Triángulo</td>
+            <td>1</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="cell-name"><b>5. Prisma Pentagonal</b></td>
+            <td>Pentágono</td>
+            <td>2</td>
+            <td>5</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ACTIVIDAD 5 -->
+    <div class="activity-card" style="padding: 6px 9px;">
+      <div class="activity-title">
+        <span>5. Detective de Cuerpos: Adivinanzas Geométricas</span>
+        <span class="activity-pts">6 Puntos (3 pts c/u)</span>
+      </div>
+      
+      <div class="riddle-box">
+        <b>Misterio A:</b> <i>"Soy un cuerpo que tiene en total <b>5 caras</b>: una base cuadrada y 4 caras laterales triangulares que se juntan en una punta. Mis esquinas son <b>5 vértices</b> y tengo <b>8 aristas</b>. ¿Quién soy?"</i>
+        <div style="margin-top: 4px; font-size: 8pt;">
+          <b>Respuesta del Detective:</b> Soy la / el ____________________________________________________
+        </div>
+      </div>
+
+      <div class="riddle-box">
+        <b>Misterio B:</b> <i>"Tengo exactamente <b>2 bases</b> con forma de triángulo y <b>3 caras laterales</b> rectangulares. Si cuentas mis esquinas verás <b>6 vértices</b> y tengo <b>9 aristas</b>. ¿Quién soy?"</i>
+        <div style="margin-top: 4px; font-size: 8pt;">
+          <b>Respuesta del Detective:</b> Soy la / el ____________________________________________________
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de página -->
+  <div class="footer-exam">
+    <span>Simulacro de Matemáticas | Temas: Cuerpos Geométricos y Secuencias</span>
+    <span>Página <b>2</b> de <b>4</b></span>
+  </div>
+</div>
+
+
+<!-- ========================================== -->
+<!-- PÁGINA 3: SECUENCIAS GEOMÉTRICAS           -->
+<!-- ========================================== -->
+<div class="page">
+  <div>
+    <!-- Running header -->
+    <div class="mini-header">
+      <div><b>Simulacro de Matemáticas</b> | Sección 3: Secuencias y Patrones</div>
+      <div>Nombre de la estudiante: _____________________________________ | Pág. <b>3</b> de <b>4</b></div>
+    </div>
+
+    <!-- SECCIÓN 3 -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+      <span class="section-badge">SECCIÓN 3: SECUENCIAS GEOMÉTRICAS (INCREMENTALES Y DECREMENTALES)</span>
+      <span style="font-size: 8pt; font-weight: bold; color: #1e40af;">Valor: 30 Puntos</span>
+    </div>
+    <div class="section-intro">
+      Analiza cómo cambian las figuras. Una secuencia es <b>incremental</b> si crece (suma figuras) y <b>decremental</b> si disminuye (resta figuras). En el Paso 4, utiliza los puntos guía para dibujar con comodidad.
+    </div>
+
+    <!-- ACTIVIDAD 6 -->
+    <div class="activity-card" style="padding: 5px 8px; margin-bottom: 5px;">
+      <div class="activity-title">
+        <span>6. Secuencia con Triángulos: Descubre la Regla</span>
+        <span class="activity-pts">10 Puntos</span>
+      </div>
+
+      <div class="seq-container">
+        <!-- Paso 1 -->
+        <div class="seq-step">
+          <span class="seq-label">Paso 1</span>
+          <div class="seq-box">
+            <span class="tri-shape"></span> <span class="tri-shape"></span>
+          </div>
+          <span style="font-size: 7.2pt; font-weight: bold; margin-top: 2px;">(2 triángulos)</span>
+        </div>
+        <span class="seq-arrow">➔</span>
+        <!-- Paso 2 -->
+        <div class="seq-step">
+          <span class="seq-label">Paso 2</span>
+          <div class="seq-box">
+            <span class="tri-shape"></span> <span class="tri-shape"></span> <span class="tri-shape"></span> <span class="tri-shape"></span> <span class="tri-shape"></span>
+          </div>
+          <span style="font-size: 7.2pt; font-weight: bold; margin-top: 2px;">(5 triángulos)</span>
+        </div>
+        <span class="seq-arrow">➔</span>
+        <!-- Paso 3 -->
+        <div class="seq-step">
+          <span class="seq-label">Paso 3</span>
+          <div class="seq-box" style="min-width: 95px;">
+            <span class="tri-shape"></span> <span class="tri-shape"></span> <span class="tri-shape"></span> <span class="tri-shape"></span> <span class="tri-shape"></span> <span class="tri-shape"></span> <span class="tri-shape"></span> <span class="tri-shape"></span>
+          </div>
+          <span style="font-size: 7.2pt; font-weight: bold; margin-top: 2px;">(8 triángulos)</span>
+        </div>
+        <span class="seq-arrow">➔</span>
+        <!-- Paso 4 (Dibujo limpio sin texto invasivo adentro) -->
+        <div class="seq-step">
+          <span class="seq-label" style="color: #1e40af; font-weight: 800; font-size: 7.8pt;">Paso 4 (Dibuja aquí)</span>
+          <div class="seq-draw-box"></div>
+          <span style="font-size: 7.3pt; font-weight: bold; margin-top: 2px; color: #1e40af;">Total: [ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ] triángulos</span>
+        </div>
+      </div>
+
+      <div style="font-size: 8pt; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <div>
+          <b>a) Tipo de secuencia (marca con X) (2 pts):</b><br>
+          <label><input type="radio" name="p6_tipo"> <span class="badge-inc">Incremental (Creciente)</span></label>&nbsp;&nbsp;
+          <label><input type="radio" name="p6_tipo"> <span class="badge-dec">Decremental (Decreciente)</span></label>
+        </div>
+        <div>
+          <b>b) Predicción numérica (2 pts):</b><br>
+          ¿Cuántos triángulos tendrá el <b>Paso 5</b>?: [ <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> ] &nbsp;|&nbsp;
+          ¿Y el <b>Paso 6</b>?: [ <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> ]
+        </div>
+      </div>
+
+      <div style="margin-top: 4px; font-size: 8pt;">
+        <b>c) Explica con tus palabras la regla de esta secuencia (¿cómo se obtiene el siguiente paso?) (6 pts):</b>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+
+    <!-- ACTIVIDAD 7 -->
+    <div class="activity-card" style="padding: 5px 8px; margin-bottom: 5px;">
+      <div class="activity-title">
+        <span>7. Secuencia con Cuadrados: Disminución Paso a Paso</span>
+        <span class="activity-pts">10 Puntos</span>
+      </div>
+
+      <div class="seq-container">
+        <!-- Paso 1 -->
+        <div class="seq-step">
+          <span class="seq-label">Paso 1</span>
+          <div class="seq-box" style="max-width: 100px;">
+            <span class="sq-shape"></span> <span class="sq-shape"></span> <span class="sq-shape"></span> <span class="sq-shape"></span> <span class="sq-shape"></span>
+            <span class="sq-shape"></span> <span class="sq-shape"></span> <span class="sq-shape"></span> <span class="sq-shape"></span> <span class="sq-shape"></span>
+            <span class="sq-shape"></span> <span class="sq-shape"></span> <span class="sq-shape"></span> <span class="sq-shape"></span>
+          </div>
+          <span style="font-size: 7.2pt; font-weight: bold; margin-top: 2px;">(14 cuadrados)</span>
+        </div>
+        <span class="seq-arrow">➔</span>
+        <!-- Paso 2 -->
+        <div class="seq-step">
+          <span class="seq-label">Paso 2</span>
+          <div class="seq-box" style="max-width: 95px;">
+            <span class="sq-shape"></span> <span class="sq-shape"></span> <span class="sq-shape"></span> <span class="sq-shape"></span> <span class="sq-shape"></span>
+            <span class="sq-shape"></span> <span class="sq-shape"></span> <span class="sq-shape"></span> <span class="sq-shape"></span> <span class="sq-shape"></span>
+            <span class="sq-shape"></span>
+          </div>
+          <span style="font-size: 7.2pt; font-weight: bold; margin-top: 2px;">(11 cuadrados)</span>
+        </div>
+        <span class="seq-arrow">➔</span>
+        <!-- Paso 3 -->
+        <div class="seq-step">
+          <span class="seq-label">Paso 3</span>
+          <div class="seq-box" style="max-width: 85px;">
+            <span class="sq-shape"></span> <span class="sq-shape"></span> <span class="sq-shape"></span> <span class="sq-shape"></span>
+            <span class="sq-shape"></span> <span class="sq-shape"></span> <span class="sq-shape"></span> <span class="sq-shape"></span>
+          </div>
+          <span style="font-size: 7.2pt; font-weight: bold; margin-top: 2px;">(8 cuadrados)</span>
+        </div>
+        <span class="seq-arrow">➔</span>
+        <!-- Paso 4 (Dibujo limpio sin texto invasivo adentro) -->
+        <div class="seq-step">
+          <span class="seq-label" style="color: #1e40af; font-weight: 800; font-size: 7.8pt;">Paso 4 (Dibuja aquí)</span>
+          <div class="seq-draw-box"></div>
+          <span style="font-size: 7.3pt; font-weight: bold; margin-top: 2px; color: #1e40af;">Total: [ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ] cuadrados</span>
+        </div>
+      </div>
+
+      <div style="font-size: 8pt; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <div>
+          <b>a) Tipo de secuencia (marca con X) (2 pts):</b><br>
+          <label><input type="radio" name="p7_tipo"> <span class="badge-inc">Incremental (Creciente)</span></label>&nbsp;&nbsp;
+          <label><input type="radio" name="p7_tipo"> <span class="badge-dec">Decremental (Decreciente)</span></label>
+        </div>
+        <div>
+          <b>b) Pregunta de análisis (2 pts):</b><br>
+          ¿Cuántos cuadrados tendrá el <b>Paso 5</b>?: [ <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> ]<br>
+          ¿En qué paso los cuadrados se acabarán (llegará a cero)?: [ <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> ]
+        </div>
+      </div>
+
+      <div style="margin-top: 4px; font-size: 8pt;">
+        <b>c) Explica con tus palabras la regla de esta secuencia (¿cómo cambia la cantidad de figuras?) (6 pts):</b>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+
+    <!-- ACTIVIDAD 8 -->
+    <div class="activity-card" style="padding: 5px 8px;">
+      <div class="activity-title">
+        <span>8. Secuencia Combinada: Círculos y Cuadrados</span>
+        <span class="activity-pts">10 Puntos</span>
+      </div>
+      <div style="font-size: 7.8pt; color: #334155; margin-bottom: 2px;">
+        Esta secuencia combina dos figuras a la vez: <b>Círculos naranjas</b> y <b>Cuadrados azules</b>.
+      </div>
+
+      <div class="seq-container" style="padding: 5px 8px; margin-bottom: 4px;">
+        <!-- Paso 1 -->
+        <div class="seq-step">
+          <span class="seq-label">Paso 1</span>
+          <div class="seq-box" style="min-width: 75px; min-height: 44px;">
+            <span class="cir-shape"></span> &nbsp; <span class="sq-shape"></span><span class="sq-shape"></span>
+          </div>
+          <span style="font-size: 7pt; color: #475569;">1 Círc., 2 Cuad.</span>
+        </div>
+        <span class="seq-arrow">➔</span>
+        <!-- Paso 2 -->
+        <div class="seq-step">
+          <span class="seq-label">Paso 2</span>
+          <div class="seq-box" style="min-width: 85px; min-height: 44px;">
+            <span class="cir-shape"></span><span class="cir-shape"></span> &nbsp; <span class="sq-shape"></span><span class="sq-shape"></span><span class="sq-shape"></span><span class="sq-shape"></span>
+          </div>
+          <span style="font-size: 7pt; color: #475569;">2 Círc., 4 Cuad.</span>
+        </div>
+        <span class="seq-arrow">➔</span>
+        <!-- Paso 3 -->
+        <div class="seq-step">
+          <span class="seq-label">Paso 3</span>
+          <div class="seq-box" style="min-width: 95px; min-height: 44px;">
+            <span class="cir-shape"></span><span class="cir-shape"></span><span class="cir-shape"></span> &nbsp; <span class="sq-shape"></span><span class="sq-shape"></span><span class="sq-shape"></span><span class="sq-shape"></span><span class="sq-shape"></span><span class="sq-shape"></span>
+          </div>
+          <span style="font-size: 7pt; color: #475569;">3 Círc., 6 Cuad.</span>
+        </div>
+        <span class="seq-arrow">➔</span>
+        <!-- Paso 4 (Dibujo limpio sin texto adentro) -->
+        <div class="seq-step">
+          <span class="seq-label" style="color: #1e40af; font-weight: 800; font-size: 7.8pt;">Paso 4 (Dibuja aquí)</span>
+          <div class="seq-draw-box"></div>
+          <span style="font-size: 7.3pt; color: #1e40af; font-weight: bold; margin-top: 2px;">Total: [ &nbsp;&nbsp;&nbsp; ] Círc. y [ &nbsp;&nbsp;&nbsp; ] Cuad.</span>
+        </div>
+      </div>
+
+      <div style="font-size: 8pt; line-height: 1.4;">
+        <b>a) Analiza cada figura por separado (4 pts):</b><br>
+        • Los <b>círculos</b> van de: 1 ➔ 2 ➔ 3 ➔ ____. Es una secuencia __________________ que aumenta de ____ en ____.<br>
+        • Los <b>cuadrados</b> van de: 2 ➔ 4 ➔ 6 ➔ ____. Es una secuencia __________________ que aumenta de ____ en ____.
+      </div>
+      <div style="margin-top: 3px; font-size: 8pt;">
+        <b>b) Explica en palabras la regla general para dibujar cualquier paso siguiente (6 pts):</b>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de página -->
+  <div class="footer-exam">
+    <span>Simulacro de Matemáticas | Temas: Cuerpos Geométricos y Secuencias</span>
+    <span>Página <b>3</b> de <b>4</b></span>
+  </div>
+</div>
+
+
+<!-- ========================================== -->
+<!-- PÁGINA 4: APLICACIÓN Y RETO CREATIVO       -->
+<!-- ========================================== -->
+<div class="page">
+  <div>
+    <!-- Running header -->
+    <div class="mini-header">
+      <div><b>Simulacro de Matemáticas</b> | Sección 4: Aplicación y Desafío Creativo</div>
+      <div>Nombre de la estudiante: _____________________________________ | Pág. <b>4</b> de <b>4</b></div>
+    </div>
+
+    <!-- SECCIÓN 4 -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+      <span class="section-badge">SECCIÓN 4: DESAFÍOS DE APLICACIÓN Y PENSAMIENTO CREATIVO</span>
+      <span style="font-size: 8pt; font-weight: bold; color: #1e40af;">Valor: 20 Puntos</span>
+    </div>
+    <div class="section-intro">
+      Aplica lo que sabes a situaciones de la vida real y demuestra tu creatividad inventando tu propio patrón geométrico.
+    </div>
+
+    <!-- ACTIVIDAD 9 -->
+    <div class="activity-card" style="padding: 6px 9px; margin-bottom: 6px;">
+      <div class="activity-title">
+        <span>9. Desafíos del Mundo Real: Modelando Cuerpos</span>
+        <span class="activity-pts">10 Puntos (5 pts por situación)</span>
+      </div>
+
+      <!-- Situación A -->
+      <div style="background: #f8fafc; border-left: 3.5px solid #0284c7; padding: 5px 8px; margin-bottom: 5px; font-size: 8pt;">
+        <b>Situación A: El Taller de Esculturas con Palillos y Plastilina (5 pts)</b><br>
+        Mateo quiere armar en su clase de ciencias dos maquetas utilizando <b>palillos para las aristas</b> y <b>bolitas de plastilina para los vértices</b>:
+        <div style="margin-top: 3px; font-size: 7.8pt; line-height: 1.45;">
+          1. Para construir una maqueta de un <b>Prisma Triangular</b>, ¿cuántos palillos y cuántas bolitas necesita Mateo?<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;➔ Palillos (aristas): <b>__________</b> &nbsp;&nbsp;|&nbsp;&nbsp; Bolitas (vértices): <b>__________</b><br>
+          2. Para construir una maqueta de una <b>Pirámide Cuadrangular</b>, ¿cuántos palillos y cuántas bolitas necesita?<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;➔ Palillos (aristas): <b>__________</b> &nbsp;&nbsp;|&nbsp;&nbsp; Bolitas (vértices): <b>__________</b><br>
+          3. Si Mateo tiene una caja con <b>12 palillos</b> y <b>8 bolitas de plastilina</b>, ¿cuál de los siguientes cuerpos puede armar <i>exactamente</i> sin que le sobre ningún material?<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<label><input type="radio" name="p9_cubo"> Un Cubo</label> &nbsp;&nbsp;&nbsp;&nbsp;
+          <label><input type="radio" name="p9_cubo"> Una Pirámide Pentagonal</label> &nbsp;&nbsp;&nbsp;&nbsp;
+          <label><input type="radio" name="p9_cubo"> Un Prisma Triangular</label>
+        </div>
+      </div>
+
+      <!-- Situación B -->
+      <div style="background: #f8fafc; border-left: 3.5px solid #16a34a; padding: 5px 8px; font-size: 8pt;">
+        <b>Situación B: El Campamento de Geometría (5 pts)</b><br>
+        En una excursión escolar, dos grupos armaron sus carpas para acampar:<br>
+        • La carpa del Grupo Verde tiene forma de <b>Pirámide Cuadrangular</b>.<br>
+        • La carpa del Grupo Azul tiene forma de <b>Prisma Triangular</b>.<br>
+        <div style="margin-top: 3px; font-size: 7.8pt; line-height: 1.45;">
+          a) ¿Cuántas caras en total tiene la carpa del Grupo Verde? [ <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> caras ]<br>
+          b) ¿Cuántas caras en total tiene la carpa del Grupo Azul? [ <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> caras ]<br>
+          c) ¿Cuál de las dos carpas tiene <b>más vértices (esquinas)</b>? Explica demostrando la cantidad de vértices de cada carpa:<br>
+          <div class="write-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIVIDAD 10 -->
+    <div class="activity-card" style="padding: 6px 9px;">
+      <div class="activity-title">
+        <span>10. ¡Tú eres la Diseñadora!: Crea tu Propia Secuencia Geométrica</span>
+        <span class="activity-pts">10 Puntos</span>
+      </div>
+      <div style="font-size: 7.8pt; color: #334155; margin-bottom: 3px;">
+        Diseña una secuencia usando <b>cuadrados</b>, <b>círculos</b> o <b>triángulos</b>. Elige si quieres que sea incremental (creciente) o decremental (decreciente). Debe tener 4 pasos con una regla constante.
+      </div>
+
+      <div style="font-size: 8pt; margin-bottom: 4px;">
+        <b>a) Mi secuencia será (marca una con X):</b> &nbsp;&nbsp;
+        <label><input type="checkbox"> <b>Incremental (suma figuras)</b></label> &nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="checkbox"> <b>Decremental (resta figuras)</b></label>
+      </div>
+
+      <!-- Cajas de dibujo limpias para la estudiante con puntos guía -->
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 4px 0;">
+        <div class="creative-box">
+          <div style="font-size: 7.5pt; font-weight: bold; color: #475569;">Paso 1</div>
+          <div></div>
+          <div style="font-size: 7.5pt; font-weight: bold;">Cantidad: [ &nbsp;&nbsp;&nbsp; ]</div>
+        </div>
+        <div class="creative-box">
+          <div style="font-size: 7.5pt; font-weight: bold; color: #475569;">Paso 2</div>
+          <div></div>
+          <div style="font-size: 7.5pt; font-weight: bold;">Cantidad: [ &nbsp;&nbsp;&nbsp; ]</div>
+        </div>
+        <div class="creative-box">
+          <div style="font-size: 7.5pt; font-weight: bold; color: #475569;">Paso 3</div>
+          <div></div>
+          <div style="font-size: 7.5pt; font-weight: bold;">Cantidad: [ &nbsp;&nbsp;&nbsp; ]</div>
+        </div>
+        <div class="creative-box">
+          <div style="font-size: 7.5pt; font-weight: bold; color: #475569;">Paso 4</div>
+          <div></div>
+          <div style="font-size: 7.5pt; font-weight: bold;">Cantidad: [ &nbsp;&nbsp;&nbsp; ]</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 4px; font-size: 8pt;">
+        <b>b) Explica en palabras cuál es la regla secreta de tu secuencia para que otra persona la pueda resolver:</b>
+        <div class="write-line"></div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+
+    <!-- AUTOEVALUACIÓN Y CIERRE -->
+    <div style="border: 1.5px solid #e2e8f0; border-radius: 6px; padding: 6px 10px; background: #f8fafc; margin-top: 5px;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="font-size: 8.5pt; font-weight: bold; color: #1e40af;">
+          🌟 ¡Felicitaciones por completar tu simulacro de matemáticas!
+        </div>
+        <div style="font-size: 7.8pt; color: #64748b;">
+          Firma de la estudiante: _______________________
+        </div>
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 8pt; margin-top: 4px; color: #334155;">
+        <span>¿Cómo te sentiste con la prueba?: &nbsp;
+          <label><input type="checkbox"> Muy fácil 😊</label> &nbsp;&nbsp;
+          <label><input type="checkbox"> Bien 🙂</label> &nbsp;&nbsp;
+          <label><input type="checkbox"> Tuvo su reto 🤔</label>
+        </span>
+        <span>Tiempo empleado: [ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ] minutos</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de página -->
+  <div class="footer-exam">
+    <span>Simulacro de Matemáticas | Temas: Cuerpos Geométricos y Secuencias</span>
+    <span>Página <b>4</b> de <b>4</b></span>
+  </div>
+</div>
+
+</body>
+</html>

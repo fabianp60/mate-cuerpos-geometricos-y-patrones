@@ -1,0 +1,7 @@
+services:
+  estudiar-mate-2:
+    build: .
+    container_name: estudiar-mate-2
+    ports:
+      - "${WEB_PORT:-3101}:80"
+    restart: unless-stopped

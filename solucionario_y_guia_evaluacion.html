@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Solucionario y Guía Pedagógica de Evaluación</title>
+<style>
+  @page {
+    size: letter portrait;
+    margin: 10mm 12mm 10mm 12mm;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Lato', 'DejaVu Sans', sans-serif;
+    color: #1e293b;
+    margin: 0;
+    padding: 0;
+    font-size: 9.5pt;
+    line-height: 1.34;
+    background: #ffffff;
+  }
+  .page {
+    page-break-after: always;
+    height: 256mm;
+    max-height: 256mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .page:last-child {
+    page-break-after: avoid;
+  }
+  
+  .guide-header {
+    border: 2px solid #0f766e;
+    background: #f0fdfa;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 7px;
+  }
+  .guide-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1.5px solid #99f6e4;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+  }
+  .guide-title {
+    font-size: 12.5pt;
+    font-weight: 800;
+    color: #0f766e;
+    text-transform: uppercase;
+  }
+  .badge-guide {
+    background: #0f766e;
+    color: white;
+    font-size: 7.8pt;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 10px;
+  }
+  
+  .section-tag {
+    background: #0f766e;
+    color: white;
+    font-weight: bold;
+    font-size: 8pt;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 3px;
+  }
+  
+  .ans-card {
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 6px 9px;
+    margin-bottom: 6px;
+    background: #ffffff;
+  }
+  .ans-title {
+    font-size: 8.8pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 3px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .badge-pts {
+    background: #e0f2fe;
+    color: #0369a1;
+    font-size: 7.2pt;
+    padding: 1px 5px;
+    border-radius: 8px;
+    font-weight: 700;
+  }
+  
+  .correct-box {
+    background: #ecfdf5;
+    border-left: 3.5px solid #10b981;
+    padding: 4px 7px;
+    font-size: 8pt;
+    margin: 2px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .rubric-box {
+    background: #fffbeb;
+    border-left: 3.5px solid #f59e0b;
+    padding: 4px 7px;
+    font-size: 7.8pt;
+    margin: 2px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .pedagogy-tip {
+    background: #eff6ff;
+    border-left: 3.5px solid #3b82f6;
+    padding: 4px 7px;
+    font-size: 7.8pt;
+    margin: 2px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  
+  .table-ans {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 7.8pt;
+    margin: 3px 0;
+    text-align: center;
+  }
+  .table-ans th {
+    background: #0f766e;
+    color: white;
+    padding: 4px 3px;
+    font-size: 7.2pt;
+    border: 1px solid #0f766e;
+  }
+  .table-ans td {
+    border: 1px solid #cbd5e1;
+    padding: 4px 3px;
+  }
+  .table-ans tr:nth-child(even) {
+    background: #f8fafc;
+  }
+  
+  .mini-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #0f766e;
+    padding-bottom: 3px;
+    margin-bottom: 5px;
+    font-size: 7.8pt;
+    color: #475569;
+  }
+  
+  .footer-exam {
+    border-top: 1px solid #cbd5e1;
+    padding-top: 3px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 7.2pt;
+    color: #64748b;
+  }
+  
+  .traffic-light {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+    margin: 3px 0;
+  }
+  .tl-card {
+    border-radius: 6px;
+    padding: 4px 6px;
+    font-size: 7.2pt;
+  }
+  .tl-green { background: #dcfce7; border: 1px solid #86efac; color: #14532d; }
+  .tl-yellow { background: #fef9c3; border: 1px solid #fde047; color: #713f12; }
+  .tl-red { background: #fee2e2; border: 1px solid #fca5a5; color: #7f1d1d; }
+
+  .mini-tri {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 9px solid #059669;
+    display: inline-block;
+    margin: 1px;
+  }
+  .mini-sq {
+    width: 8px;
+    height: 8px;
+    background: #2563eb;
+    border-radius: 1px;
+    display: inline-block;
+    margin: 1px;
+  }
+  .mini-cir {
+    width: 8px;
+    height: 8px;
+    background: #ea580c;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 1px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ========================================== -->
+<!-- GUÍA PÁGINA 1: INTRODUCCIÓN Y SECCIÓN 1    -->
+<!-- ========================================== -->
+<div class="page">
+  <div>
+    <div class="guide-header">
+      <div class="guide-title-row">
+        <div>
+          <div class="guide-title">Solucionario y Guía Pedagógica</div>
+          <div style="font-size: 8pt; color: #334155;">Documento de apoyo para el Evaluador / Padre de Familia</div>
+        </div>
+        <div style="text-align: right;">
+          <span class="badge-guide">USO EXCLUSIVO EVALUADOR</span>
+          <div style="font-size: 7.2pt; color: #475569; margin-top: 2px;">Simulacro de 60 minutos | 100 Puntos</div>
+        </div>
+      </div>
+      <div style="font-size: 7.8pt; color: #134e4a; line-height: 1.35;">
+        <b>Consejo de aplicación:</b> Brinda un espacio silencioso y cómodo. Permite que trabaje de forma autónoma durante los 60 minutos. En esta versión actualizada, los cuerpos 3D poseen <b>caras semitransparentes</b> para que pueda ver la base interior y no confunda la pirámide cuadrangular con la triangular.
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+      <span class="section-tag">SECCIÓN 1: CUERPOS GEOMÉTRICOS — PRISMAS Y PIRÁMIDES</span>
+      <span style="font-size: 7.8pt; font-weight: bold; color: #0f766e;">Total Sección: 25 Puntos</span>
+    </div>
+
+    <!-- SOLUCIÓN ACTIVIDAD 1 -->
+    <div class="ans-card">
+      <div class="ans-title">
+        <span>Solución Actividad 1: Reconocimiento Visual (15 Puntos - 2.5 pts c/u)</span>
+        <span class="badge-pts">15 Pts</span>
+      </div>
+      
+      <div style="font-size: 7.8pt; display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+        <div class="correct-box">
+          <b>• Cuerpo A:</b> <b>Cubo</b> (o Prisma Cuadrangular / Hexaedro).<br>
+          Tipo: <b>[X] Prisma</b> | Forma de base: <b>Cuadrado</b> (2 bases).
+        </div>
+        <div class="correct-box">
+          <b>• Cuerpo B:</b> <b>Pirámide Cuadrangular</b>.<br>
+          Tipo: <b>[X] Pirámide</b> | Forma de base: <b>Cuadrado</b> (base de 4 lados visible al fondo).
+        </div>
+        <div class="correct-box">
+          <b>• Cuerpo C:</b> <b>Prisma Triangular</b>.<br>
+          Tipo: <b>[X] Prisma</b> | Forma de base: <b>Triángulo</b> (2 bases triangulares).
+        </div>
+        <div class="correct-box">
+          <b>• Cuerpo D:</b> <b>Pirámide Triangular</b> (Tetraedro).<br>
+          Tipo: <b>[X] Pirámide</b> | Forma de base: <b>Triángulo</b> (base de 3 lados visible al fondo).
+        </div>
+        <div class="correct-box">
+          <b>• Cuerpo E:</b> <b>Prisma Pentagonal</b>.<br>
+          Tipo: <b>[X] Prisma</b> | Forma de base: <b>Pentágono</b> (5 lados).
+        </div>
+        <div class="correct-box">
+          <b>• Cuerpo F:</b> <b>Pirámide Hexagonal</b>.<br>
+          Tipo: <b>[X] Pirámide</b> | Forma de base: <b>Hexágono</b> (6 lados).
+        </div>
+      </div>
+      
+      <div class="pedagogy-tip">
+        <b>💡 Distinción clave entre Cuerpo B y Cuerpo D:</b> Gracias a las caras semitransparentes, en el <b>Cuerpo B</b> se observan 4 lados en la base y 5 vértices en total, mientras que en el <b>Cuerpo D</b> se observan 3 lados en la base y 4 vértices en total. Si tu hija nota esta diferencia, valora su capacidad de observación espacial.
+      </div>
+    </div>
+
+    <!-- SOLUCIÓN ACTIVIDAD 2 -->
+    <div class="ans-card">
+      <div class="ans-title">
+        <span>Solución Actividad 2: Diferencias Fundamentales (10 Puntos)</span>
+        <span class="badge-pts">10 Pts</span>
+      </div>
+      
+      <div class="correct-box">
+        <b>A. Opción Múltiple (4 pts):</b><br>
+        Respuesta correcta: <b>Opción b)</b> <i>"Los prismas tienen caras laterales con forma de rectángulo, mientras que las pirámides tienen caras laterales triangulares que se unen en la punta."</i><br>
+        <b>Rúbrica de Justificación (2 pts):</b> Es correcta si menciona que en los prismas los lados son rectangulares conectando dos bases, mientras que en las pirámides las caras son triángulos que suben hasta la cúspide.
+      </div>
+
+      <div class="correct-box" style="margin-top: 3px;">
+        <b>B. Verdadero o Falso (6 pts - 2 pts c/u):</b><br>
+        <b>1. ( V ) Verdadero:</b> Todo prisma tiene dos bases iguales y paralelas.<br>
+        <b>2. ( F ) Falso:</b> Una pirámide cuadrangular tiene <b>una sola base</b> cuadrada (no dos).<br>
+        <b>3. ( V ) Verdadero:</b> La cúspide es el vértice superior donde coinciden las caras laterales triangulares.
+      </div>
+
+      <div class="rubric-box">
+        <b>⚠️ Error común frecuente:</b> Algunos niños confunden el número de lados de la base (4) con el número de bases (1). Si comete este error, pídele que imagine la Pirámide de Egipto: ¿puede apoyarse arriba y abajo a la vez? No, solo se apoya en el suelo (1 base).
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-exam">
+    <span>Guía de Respuestas y Rúbrica de Calificación | Simulacro de Matemáticas</span>
+    <span>Página <b>1</b> de <b>4</b></span>
+  </div>
+</div>
+
+
+<!-- ========================================== -->
+<!-- GUÍA PÁGINA 2: SECCIÓN 2 (CARACTERIZACIÓN) -->
+<!-- ========================================== -->
+<div class="page">
+  <div>
+    <div class="mini-header">
+      <div><b>Solucionario y Guía Pedagógica</b> | Sección 2: Caracterización</div>
+      <div>Uso Exclusivo Evaluador | Pág. <b>2</b> de <b>4</b></div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+      <span class="section-tag">SECCIÓN 2: CARACTERIZACIÓN — CARAS, VÉRTICES Y ARISTAS</span>
+      <span style="font-size: 7.8pt; font-weight: bold; color: #0f766e;">Total Sección: 25 Puntos</span>
+    </div>
+
+    <!-- SOLUCIÓN ACTIVIDAD 3 -->
+    <div class="ans-card">
+      <div class="ans-title">
+        <span>Solución Actividad 3: Anatomía y Definiciones (9 Puntos)</span>
+        <span class="badge-pts">9 Pts</span>
+      </div>
+      <div class="correct-box">
+        <b>Definiciones esperadas (3 pts - 1 pt c/u):</b><br>
+        • <b>Cara:</b> Es cada una de las superficies planas que limitan o forman el cuerpo geométrico.<br>
+        • <b>Arista:</b> Es la línea o segmento donde se unen o intersectan dos caras (el "borde").<br>
+        • <b>Vértice:</b> Es la esquina o punto donde se unen tres o más aristas (la "punta" o esquina).<br>
+        <i>Nota evaluativa:</i> No se requiere definición formal; es excelente si utiliza palabras como "superficie", "línea/borde" y "esquina/punto".
+      </div>
+      <div class="rubric-box">
+        <b>Asignación de puntos en diagramas anatómicos (6 pts):</b><br>
+        Verificar que comprenda qué parte está señalada en el prisma (cara frontal/lateral, arista lateral, vértice, base superior) y en la pirámide (cúspide, cara triangular, arista basal, base).
+      </div>
+    </div>
+
+    <!-- SOLUCIÓN ACTIVIDAD 4 -->
+    <div class="ans-card">
+      <div class="ans-title">
+        <span>Solución Actividad 4: Gran Tabla de Conteo (10 Puntos - 2 pts por fila)</span>
+        <span class="badge-pts">10 Pts</span>
+      </div>
+
+      <table class="table-ans">
+        <thead>
+          <tr>
+            <th>Cuerpo Geométrico</th>
+            <th>Forma de Base</th>
+            <th>N° Bases</th>
+            <th>Caras Laterales</th>
+            <th>TOTAL CARAS</th>
+            <th>VÉRTICES</th>
+            <th>ARISTAS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align: left; font-weight: bold;">1. Cubo / Prisma Cuadrangular</td>
+            <td>Cuadrado</td>
+            <td><b>2</b></td>
+            <td><b>4</b></td>
+            <td><b>6</b></td>
+            <td><b>8</b></td>
+            <td><b>12</b></td>
+          </tr>
+          <tr>
+            <td style="text-align: left; font-weight: bold;">2. Prisma Triangular</td>
+            <td>Triángulo</td>
+            <td><b>2</b></td>
+            <td><b>3</b></td>
+            <td><b>5</b></td>
+            <td><b>6</b></td>
+            <td><b>9</b></td>
+          </tr>
+          <tr>
+            <td style="text-align: left; font-weight: bold;">3. Pirámide Cuadrangular</td>
+            <td>Cuadrado</td>
+            <td><b>1</b></td>
+            <td><b>4</b></td>
+            <td><b>5</b></td>
+            <td><b>5</b></td>
+            <td><b>8</b></td>
+          </tr>
+          <tr>
+            <td style="text-align: left; font-weight: bold;">4. Pirámide Triangular</td>
+            <td>Triángulo</td>
+            <td><b>1</b></td>
+            <td><b>3</b></td>
+            <td><b>4</b></td>
+            <td><b>4</b></td>
+            <td><b>6</b></td>
+          </tr>
+          <tr>
+            <td style="text-align: left; font-weight: bold;">5. Prisma Pentagonal</td>
+            <td>Pentágono</td>
+            <td><b>2</b></td>
+            <td><b>5</b></td>
+            <td><b>7</b></td>
+            <td><b>10</b></td>
+            <td><b>15</b></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="pedagogy-tip">
+        <b>🔍 Las "Fórmulas Mágicas" para deducir sin equivocarse:</b><br>
+        • <b>En los Prismas (base de n lados):</b> Caras = n + 2 | Vértices = 2 × n | Aristas = 3 × n.<br>
+        • <b>En las Pirámides (base de n lados):</b> Caras = n + 1 | Vértices = n + 1 | Aristas = 2 × n.<br>
+        ¡Observa que en las pirámides el número de caras SIEMPRE es exactamente igual al número de vértices!
+      </div>
+    </div>
+
+    <!-- SOLUCIÓN ACTIVIDAD 5 -->
+    <div class="ans-card">
+      <div class="ans-title">
+        <span>Solución Actividad 5: Detective de Cuerpos (6 Puntos - 3 pts c/u)</span>
+        <span class="badge-pts">6 Pts</span>
+      </div>
+      <div class="correct-box">
+        <b>Misterio A:</b> <b>Pirámide Cuadrangular</b> (1 base cuadrada + 4 caras triangulares = 5 caras; 5 vértices, 8 aristas).<br>
+        <b>Misterio B:</b> <b>Prisma Triangular</b> (2 bases triangulares + 3 caras rectangulares = 5 caras; 6 vértices, 9 aristas).
+      </div>
+      <div class="pedagogy-tip">
+        <b>💡 Valor formativo:</b> Ambos cuerpos tienen 5 caras, pero uno tiene 5 vértices y el otro 6 vértices. Esta pregunta evalúa si discrimina entre dos cuerpos que comparten la misma cantidad de caras totales.
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-exam">
+    <span>Guía de Respuestas y Rúbrica de Calificación | Simulacro de Matemáticas</span>
+    <span>Página <b>2</b> de <b>4</b></span>
+  </div>
+</div>
+
+
+<!-- ========================================== -->
+<!-- GUÍA PÁGINA 3: SECCIÓN 3 (SECUENCIAS)      -->
+<!-- ========================================== -->
+<div class="page">
+  <div>
+    <div class="mini-header">
+      <div><b>Solucionario y Guía Pedagógica</b> | Sección 3: Secuencias y Patrones</div>
+      <div>Uso Exclusivo Evaluador | Pág. <b>3</b> de <b>4</b></div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+      <span class="section-tag">SECCIÓN 3: SECUENCIAS GEOMÉTRICAS (INCREMENTALES Y DECREMENTALES)</span>
+      <span style="font-size: 7.8pt; font-weight: bold; color: #0f766e;">Total Sección: 30 Puntos</span>
+    </div>
+
+    <!-- SOLUCIÓN ACTIVIDAD 6 -->
+    <div class="ans-card">
+      <div class="ans-title">
+        <span>Solución Actividad 6: Secuencia Incremental de Triángulos (10 Puntos)</span>
+        <span class="badge-pts">10 Pts</span>
+      </div>
+      <div class="correct-box">
+        <b>• Dibujo Paso 4:</b> Debe dibujar exactamente <b>11 triángulos</b> (2 pts).<br>
+        <span style="display: inline-block; background: #fff; padding: 2px 5px; border: 1px solid #cbd5e1; border-radius: 4px; margin: 2px 0;">
+          <b>Visualización:</b>
+          <span class="mini-tri"></span> <span class="mini-tri"></span> <span class="mini-tri"></span> <span class="mini-tri"></span> <span class="mini-tri"></span> <span class="mini-tri"></span> <span class="mini-tri"></span> <span class="mini-tri"></span> <span class="mini-tri"></span> <span class="mini-tri"></span> <span class="mini-tri"></span>
+          (11 triángulos)
+        </span><br>
+        <b>• a) Clasificación:</b> <b>[X] Incremental (Creciente)</b> (2 pts).<br>
+        <b>• b) Predicción:</b> Paso 5 = <b>14 triángulos</b> | Paso 6 = <b>17 triángulos</b> (2 pts - 1 pt c/u).<br>
+        <b>• c) Regla en palabras (4 pts):</b><br>
+        <i>Respuesta modelo:</i> "Es una secuencia incremental porque en cada paso se suman 3 triángulos a la figura anterior" (o "va aumentando de 3 en 3 triángulos cada vez").
+      </div>
+      <div class="rubric-box">
+        <b>Rúbrica para calificar la regla verbal:</b><br>
+        • <b>4 pts (Completa):</b> Dice que es creciente/incremental y especifica que se suman 3 triángulos.<br>
+        • <b>2-3 pts (Parcial):</b> Dice "se suman 3" pero omite la palabra incremental o no menciona qué figura es.<br>
+        • <b>0-1 pt (Insuficiente):</b> Solo dice "se hacen más grandes" o "cambia".
+      </div>
+    </div>
+
+    <!-- SOLUCIÓN ACTIVIDAD 7 -->
+    <div class="ans-card">
+      <div class="ans-title">
+        <span>Solución Actividad 7: Secuencia Decremental de Cuadrados (10 Puntos)</span>
+        <span class="badge-pts">10 Pts</span>
+      </div>
+      <div class="correct-box">
+        <b>• Dibujo Paso 4:</b> Debe dibujar exactamente <b>5 cuadrados</b> (8 - 3 = 5) (2 pts).<br>
+        <span style="display: inline-block; background: #fff; padding: 2px 5px; border: 1px solid #cbd5e1; border-radius: 4px; margin: 2px 0;">
+          <b>Visualización:</b>
+          <span class="mini-sq"></span> <span class="mini-sq"></span> <span class="mini-sq"></span> <span class="mini-sq"></span> <span class="mini-sq"></span>
+          (5 cuadrados)
+        </span><br>
+        <b>• a) Clasificación:</b> <b>[X] Decremental (Decreciente)</b> (2 pts).<br>
+        <b>• b) Análisis:</b> Paso 5 = <b>2 cuadrados</b> (5 - 3 = 2). Se acabarán en el <b>Paso 6</b> (2 - 3 daría número negativo, ya no se pueden dibujar figuras completas) (2 pts).<br>
+        <b>• c) Regla en palabras (4 pts):</b><br>
+        <i>Respuesta modelo:</i> "Es una secuencia decremental porque en cada paso se restan o quitan 3 cuadrados a la cantidad anterior" (o "va disminuyendo de 3 en 3 cuadrados cada vez").
+      </div>
+      <div class="pedagogy-tip">
+        <b>💡 Habilidad clave evaluada:</b> El uso del vocabulario matemático preciso ("decremental", "disminuye", "resta", "patrón de resta de 3"). Es fundamental que ella aprenda a verbalizar el porqué del número.
+      </div>
+    </div>
+
+    <!-- SOLUCIÓN ACTIVIDAD 8 -->
+    <div class="ans-card">
+      <div class="ans-title">
+        <span>Solución Actividad 8: Secuencia Combinada Círculos y Cuadrados (10 Puntos)</span>
+        <span class="badge-pts">10 Pts</span>
+      </div>
+      <div class="correct-box">
+        <b>• Dibujo Paso 4:</b> Debe dibujar <b>4 círculos</b> y <b>8 cuadrados</b> (2 pts).<br>
+        <span style="display: inline-block; background: #fff; padding: 2px 5px; border: 1px solid #cbd5e1; border-radius: 4px; margin: 2px 0;">
+          <b>Visualización:</b>
+          <span class="mini-cir"></span> <span class="mini-cir"></span> <span class="mini-cir"></span> <span class="mini-cir"></span> &nbsp;
+          <span class="mini-sq"></span> <span class="mini-sq"></span> <span class="mini-sq"></span> <span class="mini-sq"></span> <span class="mini-sq"></span> <span class="mini-sq"></span> <span class="mini-sq"></span> <span class="mini-sq"></span>
+          (4 círculos y 8 cuadrados)
+        </span><br>
+        <b>• a) Discriminación por figura (4 pts):</b><br>
+        - Círculos: 1 ➔ 2 ➔ 3 ➔ <b>4</b>. Es <b>incremental</b> y aumenta de <b>1 en 1</b>.<br>
+        - Cuadrados: 2 ➔ 4 ➔ 6 ➔ <b>8</b>. Es <b>incremental</b> y aumenta de <b>2 en 2</b>.<br>
+        <b>• b) Regla general en palabras (4 pts):</b><br>
+        <i>Respuesta esperada:</i> "En cada paso se agrega 1 círculo nuevo y 2 cuadrados nuevos a la figura" (o "los círculos van de 1 en 1 y los cuadrados van de 2 en 2").
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-exam">
+    <span>Guía de Respuestas y Rúbrica de Calificación | Simulacro de Matemáticas</span>
+    <span>Página <b>3</b> de <b>4</b></span>
+  </div>
+</div>
+
+
+<!-- ========================================== -->
+<!-- GUÍA PÁGINA 4: SECCIÓN 4 Y PLAN DE ACCIÓN  -->
+<!-- ========================================== -->
+<div class="page">
+  <div>
+    <div class="mini-header">
+      <div><b>Solucionario y Guía Pedagógica</b> | Sección 4: Desafíos y Diagnóstico</div>
+      <div>Uso Exclusivo Evaluador | Pág. <b>4</b> de <b>4</b></div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+      <span class="section-tag">SECCIÓN 4: APLICACIÓN, CREATIVIDAD Y DIAGNÓSTICO</span>
+      <span style="font-size: 7.8pt; font-weight: bold; color: #0f766e;">Total Sección: 20 Puntos</span>
+    </div>
+
+    <!-- SOLUCIÓN ACTIVIDAD 9 -->
+    <div class="ans-card">
+      <div class="ans-title">
+        <span>Solución Actividad 9: Problemas del Mundo Real (10 Puntos)</span>
+        <span class="badge-pts">10 Pts</span>
+      </div>
+      <div class="correct-box">
+        <b>Situación A (Palillos y Plastilina) (5 pts):</b><br>
+        1. Prisma Triangular: <b>9 palillos</b> (aristas) y <b>6 bolitas</b> (vértices). (2 pts)<br>
+        2. Pirámide Cuadrangular: <b>8 palillos</b> (aristas) y <b>5 bolitas</b> (vértices). (2 pts)<br>
+        3. Con 12 palillos y 8 bolitas: <b>[X] Un Cubo</b> (el cubo tiene exactamente 12 aristas y 8 vértices). (1 pt)
+      </div>
+      <div class="correct-box" style="margin-top: 3px;">
+        <b>Situación B (Carpas) (5 pts):</b><br>
+        a) Carpa Verde (Pirámide Cuadrangular): <b>5 caras</b> (1 base + 4 laterales). (1.5 pts)<br>
+        b) Carpa Azul (Prisma Triangular): <b>5 caras</b> (2 bases + 3 laterales). (1.5 pts)<br>
+        c) Vértices: La Carpa Azul tiene <b>más vértices (6 vértices)</b> que la Verde (<b>5 vértices</b>). (2 pts)
+      </div>
+    </div>
+
+    <!-- SOLUCIÓN ACTIVIDAD 10 -->
+    <div class="ans-card">
+      <div class="ans-title">
+        <span>Solución Actividad 10: Reto Creativo (10 Puntos)</span>
+        <span class="badge-pts">10 Pts</span>
+      </div>
+      <div class="rubric-box">
+        <b>Criterios para calificar la secuencia inventada por la estudiante:</b><br>
+        • <b>Coherencia del patrón (4 pts):</b> Los 4 pasos deben mantener una cantidad que aumente o disminuya de forma constante (ej. +2, +3, -2, etc.).<br>
+        • <b>Conteo numérico correcto (2 pts):</b> La cantidad anotada debajo de cada caja debe coincidir exactamente con las figuras dibujadas.<br>
+        • <b>Clasificación correcta (2 pts):</b> Marcó correctamente si su patrón es incremental o decremental.<br>
+        • <b>Explicación verbal clara (2 pts):</b> Escribió con claridad la regla ("mi secuencia empieza con X y suma/resta Y figuras en cada paso").
+      </div>
+    </div>
+
+    <!-- SEMÁFORO DIAGNÓSTICO -->
+    <div class="ans-card" style="margin-top: 3px;">
+      <div class="ans-title" style="color: #0f766e;">
+        <span>Semáforo de Diagnóstico y Plan de Refuerzo para el Hogar</span>
+      </div>
+      
+      <div class="traffic-light">
+        <div class="tl-card tl-green">
+          <b>🟢 90 - 100 PUNTOS: EXCELENTE</b><br>
+          <b>Dominio completo:</b> Comprende a cabalidad las diferencias entre prismas y pirámides, cuenta elementos tridimensionales sin omitir bases ni caras ocultas, y expresa con soltura la regla verbal de secuencias. ¡Lista para el examen escolar con total confianza!
+        </div>
+        <div class="tl-card tl-yellow">
+          <b>🟡 70 - 89 PUNTOS: BUENO (EN PROCESO)</b><br>
+          <b>Pequeños detalles a afinar:</b> Probablemente cometió algún error menor al contar aristas de figuras con más lados (como prismas pentagonales) o en la redacción de la regla verbal. Refuerza pidiéndole que explique en voz alta la regla usando la frase: <i>"Va sumando/restando ___ figuras cada vez"</i>.
+        </div>
+        <div class="tl-card tl-red">
+          <b>🔴 MENOS DE 70 PUNTOS: REFUERZO</b><br>
+          <b>Actividad práctica sugerida:</b> Construyan juntos en casa con plastilina y palillos de dientes un cubo y una pirámide cuadrangular. Tocar físicamente las aristas y las esquinas hace que el concepto sea 100% tangible y memorable para toda la vida.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-exam">
+    <span>Guía de Respuestas y Rúbrica de Calificación | Simulacro de Matemáticas</span>
+    <span>Página <b>4</b> de <b>4</b></span>
+  </div>
+</div>
+
+</body>
+</html>

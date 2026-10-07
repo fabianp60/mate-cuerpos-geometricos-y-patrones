@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aventura Matemática de Luciana · Cuerpos geométricos y patrones</title>
+<meta name="description" content="Juegos y lecciones para practicar cuerpos geométricos, caras, vértices, aristas y secuencias de patrones en 4.º grado.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg-shapes" aria-hidden="true">
+  <i class="b1"></i><i class="b2"></i><i class="b3"></i><i class="b4"></i><i class="b5"></i>
+</div>
+<header id="topbar" class="topbar" hidden>
+  <button id="homeBtn" class="logo" onclick="go('home')" aria-label="Ir al mapa">🦊 <span>Aventura Mate</span></button>
+  <div class="hud">
+    <div class="chip" title="Nivel"><span id="hudLevel">Nv 1</span></div>
+    <div class="xpwrap" title="Experiencia"><div id="hudXp" class="xpbar"></div><span id="hudXpText">0 XP</span></div>
+    <div class="chip" title="Estrellas">⭐ <b id="hudStars">0</b></div>
+    <button class="chip btn-ghost" id="soundBtn" onclick="toggleSound()" aria-label="Sonido">🔊</button>
+  </div>
+</header>
+<main id="app" aria-live="polite"></main>
+<canvas id="confetti" aria-hidden="true"></canvas>
+<script src="app.js"></script>
+</body>
+</html>
