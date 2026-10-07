@@ -1,9 +1,20 @@
-# Simulacro de Matemáticas: Geometría y Patrones
+# Aventura Matemática: Cuerpos Geométricos y Patrones 📐✨
 
-Este proyecto contiene el material completo para evaluar y validar los conocimientos matemáticos de tu hija en tres temas fundamentales:
+Aplicación interactiva y material de evaluación para 4.º grado, enfocada en:
 1. **Cuerpos geométricos:** Prismas y pirámides (identificación, nombres según la base, propiedades distintivas).
-2. **Caracterización geométrica:** Caras (basales y laterales), vértices (y cúspide) y aristas.
-3. **Secuencias y patrones geométricos:** Secuencias con figuras planas (cuadrados, círculos, triángulos), clasificación en **incrementales** y **decrementales**, dibujo del término siguiente y **explicación verbal obligatoria de la regla matemática**.
+2. **Caracterización geométrica:** Caras (basales y laterales), vértices (y cúspide) y aristas con modelos 3D interactivos.
+3. **Secuencias y patrones:** Patrones incrementales y decrementales, deducción de reglas y predicción del siguiente término.
+
+---
+
+## 🎮 Juego Interactivo Web (GitHub Pages)
+
+El proyecto cuenta con una aplicación web completa y autónoma (HTML5, CSS3, JavaScript puro) lista para jugarse en navegadores web en PC, tablets y smartphones:
+
+- **Modo Lección:** Explicaciones visuales y modelos geométricos 3D translúcidos renderizados en tiempo real con Canvas.
+- **Minijuegos de Práctica:** Desafíos de caras/vértices/aristas y secuencias numéricas/geométricas.
+- **Simulacro Interactivo:** Evaluación con retroalimentación instantánea, estrellas, puntos de experiencia (XP) y sonido sintetizado con Web Audio API.
+- **Progreso automático:** Se guarda automáticamente en el navegador (`localStorage`).
 
 ---
 
